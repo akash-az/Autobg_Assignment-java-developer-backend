@@ -1,5 +1,7 @@
                             ## Assignment Java Backend Developer
 
+```java
+
                     Section 1: Theoretical Questions
 
 ### 1. Explain the difference between an interface and an abstract class in Java. When would you use one over the other?
@@ -28,13 +30,13 @@ Both interfaces and abstract classes in Java are used to achieve abstraction, bu
 
 - Use an abstract class when:
 
-  - You need to provide a common base implementation for derived classes.
-  - You need instance variables that derived classes can inherit.
+  - when we  need to provide a common base implementation for derived classes.
+  - when we need instance variables that derived classes can inherit.
   - There is an "is-a" relationship (e.g., `Dog extends Animal`).
 
 - Use an interface when:
-  - You want to define a contract for unrelated classes (e.g., `Flyable` for `Airplane` and `Bird`).
-  - You need multiple inheritance.
+  - when we want to define a contract for unrelated classes (e.g., `Flyable` for `Airplane` and `Bird`).
+  - when we need multiple inheritance.
   - There is a "can-do" relationship.
 
 ---
@@ -50,9 +52,9 @@ Both interfaces and abstract classes in Java are used to achieve abstraction, bu
   - Methods: Cannot be overridden.
   - Classes: Cannot be subclassed.
 
-\*\* Example:
+ Example:
 
-```java
+
 
 class Values {
     final int CONST_VALUE = 30; // final variable
