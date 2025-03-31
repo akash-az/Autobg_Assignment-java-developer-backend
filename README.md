@@ -45,89 +45,117 @@ Both interfaces and abstract classes in Java are used to achieve abstraction, bu
 
 ## Answer:
 
-# `final` keyword:
+# final keyword:
 
-- Used to restrict modification.
-  - Variables: Become constants (value cannot change).
-  - Methods: Cannot be overridden.
-  - Classes: Cannot be subclassed.
+final keyword is used to restrict modification. It can be applied to variables, methods, and classes.
 
- Example:
+* final variables become constants (their value can't be changed).
+* final methods cannot be overridden by subclasses.
+* final classes cannot be subclassed (inherited from).
 
+Example:
 
-
-class Values {
-    final int CONST_VALUE = 30; // final variable
+class values {
+    final int const_value = 30; // final variable
     final void myFinalMethod() { // final method
-        System.out.println("Cannot override this.");
+        System.out.println("This method cannot be overridden.");
     }
 }
 
-final class FinalClass { } // Cannot inherit this class
+ final class FinalClass { // final class
+    // ...
+}
 
-# finally :
+# finally:
 
-Used in try-catch blocks to execute code always (e.g., resource cleanup).
+* finally keyword is used in try-catch blocks to define a block of code that always executes, regardless of whether an
+  exception is thrown or not.
+* It's typically used to release resources (like closing files or database connections) that need to be cleaned up.
 
-* Example:
+Example:
 
 try {
+
     int result = 25 / 0;
+    System.out.println(result);
 } catch (ArithmeticException e) {
     System.out.println("Division by zero!");
 } finally {
-    System.out.println("This runs no matter what.");
+    System.out.println("This code always runs."); // Resource cleanup
 }
+
+
+
 
 # finalize():
 
-A method called by the garbage collector before object destruction. Used for cleanup.
+finalize is a method (not a keyword like the others).
+It's called by the garbage collector before an object is reclaimed.
+It's intended for cleanup operations, like releasing native resources.
 
-* Example:
+Example:
 
 class MyClass {
     @Override
     protected void finalize() throws Throwable {
-        System.out.println("Finalize called.");
+        // Cleanup code (e.g., closing a file)
+        System.out.println("Finalize method called.");
         super.finalize();
     }
 }
+
 
 ### 3. How does Java handle memory management and garbage collection? What is the role of the JVM in this process?
 
 Answer:
 
-# Memory Management:
+1. Memory Management in Java
 
-  Heap Memory: Stores objects (shared across threads).
+The JVM organizes memory into distinct runtime areas:
 
-  Stack Memory: Stores method calls, local primitives, and references (per-thread).
+* Heap Memory:
+-> Stores objects and their instance variables.
+-> Shared across all threads.
 
-  Code/Native Memory: JVM internal use.
+* Stack Memory:
+-> It stores method calls, local primitives, and object references (pointers to heap objects).
+-> Each thread has its own stack.
 
-  Garbage Collection (GC):
+*Code Cache: JIT-compiled native code.
 
-* Steps:
+* Native Memory: For JVM internal operations,which is not part of the heap.
 
-  Mark: Identify unreachable objects (no active references).
 
-  Sweep: Remove marked objects.
+2. Garbage Collection
 
-  Compact: Reorganize memory (optional).
+The JVM automatically reclaims memory by removing unreachable objects.
 
-* Types:
+Key steps:
 
-  Minor GC: Cleans Young Generation (frequent).
+-> Identify Garbage:
+* Objects that are no longer referenced by any active thread or static variable are marked as unreachable.
+* GC algorithms traverse the object graph starting from GC roots (e.g., static fields, thread stacks).
 
-  Major/Full GC: Cleans Old Generation (slower).
 
-* JVM Role:
+-> Collect Garbage:
 
-  Manages memory allocation (heap/stack).
+* Different algorithms  reclaim memory:
+* Minor GC: Cleans the Young Generation (fast but frequent).
+* Major/Full GC: Cleans the Old Generation (slower, pauses the application).
 
-  Runs GC algorithms (e.g., G1, Parallel).
 
-  Triggers GC when memory thresholds are reached.
+3. Role of the JVM
+
+The JVM is central to memory management and garbage collection:
+
+Memory Allocation:
+-> Allocates heap/stack memory and tracks object references.
+
+GC Execution:
+-> Runs garbage collectors (e.g:  Serial, Parallel) based on heap usage and configuration.
+-> Triggers GC when memory pools  fill up.
+
+
 
 
 
@@ -153,8 +181,10 @@ public class FirstUniqueCharacter {
     }
 
     public static void main(String[] args) {
-        System.out.println(findFirstNonRepeatingChar("swiss"));
-        System.out.println(findFirstNonRepeatingChar("DIGI5"));
+        String string1 = "swiss";
+        System.out.println("First non-repeating character in :" + string1 + "is :" + findFirstNonRepeatingChar(string1));
+        String string2 = "DIGI5";
+        System.out.println("First non-repeating character in :" + string2 + "is :" + findFirstNonRepeatingChar(string2));
     }
 }
 
@@ -166,7 +196,19 @@ First non-repeating character in DIGI5: D
 
 ### 5. Reverse Words in a Sentence
 
-## Solution Code:
+Write a Java function that takes a sentence as input and reverses the order of words while
+keeping the characters in each word unchanged
+
+Example :
+Input: "Java is awesome"
+Output: "awesome is Java"
+
+Constraints:
+• You cannot use built-in functions like Collections.reverse().
+• Preserve spaces between words as in the input.
+
+
+Solution :
 
 
 public class ReverseWords {
